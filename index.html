@@ -1,34 +1,53 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Code Incarnate</title>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: #0b0f0c;
-  }
-  video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    -webkit-object-fit: cover; /* Safari uyumluluğu */
-    z-index: -1;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GivetheAnimation1</title>
+  <style>
+    /* Tam ekran ve sayfaya göre otomatik boyutlandırma */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: black; /* animasyon arkaplanı */
+    }
+
+    #animation {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* animasyon bozulmadan sığacak */
+    }
+  </style>
 </head>
 <body>
-  <video autoplay loop muted playsinline preload="auto">
+  <!-- Animasyon dosyan -->
+  <video id="animation" autoplay loop muted playsinline>
     <source src="givetheanimation1.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+    Tarayıcınız video etiketini desteklemiyor.
   </video>
+
+  <script>
+    // Safari’de autoplay sorunlarını engellemek için
+    const anim = document.getElementById('animation');
+    anim.play().catch(() => {
+      // Kullanıcı etkileşimi ile başlat
+      window.addEventListener('click', () => anim.play());
+    });
+
+    // Tam ekran yap
+    function resizeVideo() {
+      anim.style.width = window.innerWidth + 'px';
+      anim.style.height = window.innerHeight + 'px';
+    }
+    window.addEventListener('resize', resizeVideo);
+    resizeVideo();
+  </script>
 </body>
 </html>
