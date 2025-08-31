@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Code Incarnate</title>
 <style>
   html, body {
@@ -20,17 +20,33 @@
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    -webkit-object-fit: cover; /* Safari uyumluluğu */
+    -webkit-object-fit: cover;
     z-index: -1;
   }
 </style>
 </head>
 <body>
 
-<video autoplay loop muted playsinline preload="auto">
+<video id="mainVideo" loop muted playsinline preload="auto">
   <source src="givetheanimation1.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+<script>
+  const video = document.getElementById('mainVideo');
+
+  // Video autoplay promise ile başlatılıyor
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      // Başarılı
+    }).catch(error => {
+      // Safari bazen load sırasında engelliyor, sessiz modda tekrar dene
+      video.muted = true;
+      video.play();
+    });
+  }
+</script>
 
 </body>
 </html>
