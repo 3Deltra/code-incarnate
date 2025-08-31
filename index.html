@@ -6,25 +6,27 @@
 <title>Code Incarnate</title>
 <style>
   html, body {
-    height: 100%;
     margin: 0;
-  }
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     background-color: #0b0f0c;
   }
   video {
-    width: 100vw;       /* Ekranı yatay olarak doldurur */
-    height: 100vh;      /* Ekranı dikey olarak doldurur */
-    object-fit: cover;   /* Videonun kırpılmadan ekrana oturmasını sağlar */
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
   }
 </style>
 </head>
 <body>
   <video autoplay loop muted playsinline preload="auto">
-    <source src="givetheanimation1.mp4" type="video/mp4" />
+    <source src="givetheanimation1.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </body>
