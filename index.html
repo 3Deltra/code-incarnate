@@ -30,7 +30,7 @@
     min-width: 100%;
     min-height: 100%;
     transform: translate(-50%, -50%);
-    object-fit: cover; /* tam ekran ve siyah çerçeve yok */
+    object-fit: cover;
     background: black;
   }
 </style>
@@ -38,7 +38,7 @@
 <body>
 
 <div id="video-container">
-  <video id="animation" autoplay loop muted playsinline>
+  <video id="animation" autoplay loop muted playsinline webkit-playsinline>
     <source src="givetheanimation1.mp4" type="video/mp4">
     Tarayıcınız video etiketini desteklemiyor.
   </video>
@@ -47,13 +47,18 @@
 <script>
   const anim = document.getElementById('animation');
 
-  // Safari ve Chrome autoplay garantisi
-  anim.play().catch(() => {
-    // kullanıcı tıkladığında başlat
-    window.addEventListener('click', () => anim.play());
-  });
+  // Safari ve Chrome uyumlu autoplay tetikleme
+  function startVideo() {
+    anim.play().catch(() => {
+      // kullanıcı etkileşimi ile tetikleme
+      window.addEventListener('click', () => anim.play());
+      window.addEventListener('touchstart', () => anim.play());
+    });
+  }
 
-  // Pencere boyutu değişse de tam ekran
+  startVideo();
+
+  // Pencere yeniden boyutlanınca tam ekran
   function resizeVideo() {
     anim.style.width = window.innerWidth + 'px';
     anim.style.height = window.innerHeight + 'px';
