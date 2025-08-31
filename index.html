@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Code Incarnate</title>
 <style>
   html, body {
@@ -20,17 +20,39 @@
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    -webkit-object-fit: cover; /* Safari uyumluluğu */
+    -webkit-object-fit: cover;
     z-index: -1;
+  }
+  #playOverlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: transparent;
+    z-index: 2;
   }
 </style>
 </head>
 <body>
-  <video autoplay loop muted playsinline preload="auto">
-    <source src="givetheanimation1.mp4" type="video/mp4">
-    <!-- Opsiyonel: WebM formatı mobil ve bazı tarayıcılar için yedek -->
-    <source src="givetheanimation1.webm" type="video/webm">
-    Your browser does not support the video tag.
-  </video>
+
+<div id="playOverlay"></div>
+
+<video id="mainVideo" loop muted playsinline preload="auto">
+  <source src="givetheanimation1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<script>
+  const video = document.getElementById('mainVideo');
+  const overlay = document.getElementById('playOverlay');
+
+  // Kullanıcı ekrana dokununca video başlatılır
+  overlay.addEventListener('click', () => {
+    video.play();
+    overlay.style.display = 'none'; // overlay kaybolur
+  });
+</script>
+
 </body>
 </html>
