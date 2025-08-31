@@ -1,67 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GivetheAnimation1</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Code Incarnate</title>
 <style>
   html, body {
+    height: 100%;
     margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: black;
   }
-
-  #video-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0b0f0c;
   }
-
-  #animation {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: cover; /* Ekranı tamamen kaplar, siyah çerçeve olmaz */
-    background: black;
+  .wrap {
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  video {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100vw;       /* Ekranı yatay olarak doldurur */
+    height: 100vh;      /* Ekranı dikey olarak doldurur */
+    object-fit: cover;   /* Videonun kırpılmadan ekrana oturmasını sağlar */
   }
 </style>
 </head>
 <body>
-
-<div id="video-container">
-  <video id="animation" autoplay loop muted playsinline>
-    <source src="givetheanimation1.mp4" type="video/mp4">
-    Tarayıcınız video etiketini desteklemiyor.
+  <div class="wrap">
+    <video autoplay loop muted playsinline preload="auto">
+      <source src="givetheanimation1.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <video autoplay loop muted playsinline preload="auto">
+    <source src="givetheanimation1.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
   </video>
-</div>
-
-<script>
-  const anim = document.getElementById('animation');
-
-  // Safari ve Chrome autoplay güvence
-  anim.play().catch(() => {
-    window.addEventListener('click', () => anim.play());
-  });
-
-  // Pencere boyutu değişince de full ekran
-  function resizeVideo() {
-    anim.style.width = window.innerWidth + 'px';
-    anim.style.height = window.innerHeight + 'px';
-  }
-
-  window.addEventListener('resize', resizeVideo);
-  resizeVideo();
-</script>
-
 </body>
 </html>
