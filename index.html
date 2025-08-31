@@ -5,43 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GivetheAnimation1</title>
   <style>
-    /* Tam ekran ve sayfaya göre otomatik boyutlandırma */
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: black; /* animasyon arkaplanı */
+      background-color: black;
+    }
+
+    #video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
     }
 
     #animation {
       position: absolute;
       top: 50%;
       left: 50%;
+      min-width: 100%;
+      min-height: 100%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* animasyon bozulmadan sığacak */
+      object-fit: cover; /* Bozulmadan tam ekran */
     }
   </style>
 </head>
 <body>
-  <!-- Animasyon dosyan -->
-  <video id="animation" autoplay loop muted playsinline>
-    <source src="givetheanimation1.mp4" type="video/mp4">
-    Tarayıcınız video etiketini desteklemiyor.
-  </video>
+  <div id="video-container">
+    <video id="animation" autoplay loop muted playsinline>
+      <source src="givetheanimation1.mp4" type="video/mp4">
+      Tarayıcınız video etiketini desteklemiyor.
+    </video>
+  </div>
 
   <script>
-    // Safari’de autoplay sorunlarını engellemek için
     const anim = document.getElementById('animation');
+    // Safari ve Chrome autoplay garantisi
     anim.play().catch(() => {
-      // Kullanıcı etkileşimi ile başlat
       window.addEventListener('click', () => anim.play());
     });
 
-    // Tam ekran yap
+    // Pencere yeniden boyutlanınca da tam ekran
     function resizeVideo() {
       anim.style.width = window.innerWidth + 'px';
       anim.style.height = window.innerHeight + 'px';
