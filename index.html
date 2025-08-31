@@ -1,62 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GivetheAnimation1</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: black;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GivetheAnimation1</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+  }
 
-    #video-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
+  #video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
 
-    #animation {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      transform: translate(-50%, -50%);
-      object-fit: cover; /* Bozulmadan tam ekran */
-    }
-  </style>
+  #animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Ekranı tamamen kaplar, siyah çerçeve olmaz */
+    background: black;
+  }
+</style>
 </head>
 <body>
-  <div id="video-container">
-    <video id="animation" autoplay loop muted playsinline>
-      <source src="givetheanimation1.mp4" type="video/mp4">
-      Tarayıcınız video etiketini desteklemiyor.
-    </video>
-  </div>
 
-  <script>
-    const anim = document.getElementById('animation');
-    // Safari ve Chrome autoplay garantisi
-    anim.play().catch(() => {
-      window.addEventListener('click', () => anim.play());
-    });
+<div id="video-container">
+  <video id="animation" autoplay loop muted playsinline>
+    <source src="givetheanimation1.mp4" type="video/mp4">
+    Tarayıcınız video etiketini desteklemiyor.
+  </video>
+</div>
 
-    // Pencere yeniden boyutlanınca da tam ekran
-    function resizeVideo() {
-      anim.style.width = window.innerWidth + 'px';
-      anim.style.height = window.innerHeight + 'px';
-    }
-    window.addEventListener('resize', resizeVideo);
-    resizeVideo();
-  </script>
+<script>
+  const anim = document.getElementById('animation');
+
+  // Safari ve Chrome autoplay güvence
+  anim.play().catch(() => {
+    window.addEventListener('click', () => anim.play());
+  });
+
+  // Pencere boyutu değişince de full ekran
+  function resizeVideo() {
+    anim.style.width = window.innerWidth + 'px';
+    anim.style.height = window.innerHeight + 'px';
+  }
+
+  window.addEventListener('resize', resizeVideo);
+  resizeVideo();
+</script>
+
 </body>
 </html>
